@@ -13,22 +13,23 @@ const Cart = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const tempData = [];
-    for (const itemId in cartItems) {
-      const itemSizes = cartItems[itemId];
-      for (const size in itemSizes) {
-        if (itemSizes[size] > 0) {
-          tempData.push({
-            _id: itemId,
-            size: size,
-            quantity: itemSizes[size],
-          });
+    if (products.length > 0) {
+      const tempData = [];
+      for (const itemId in cartItems) {
+        const itemSizes = cartItems[itemId];
+        for (const size in itemSizes) {
+          if (itemSizes[size] > 0) {
+            tempData.push({
+              _id: itemId,
+              size: size,
+              quantity: itemSizes[size],
+            });
+          }
         }
       }
+      setCartData(tempData);
     }
-    setCartData(tempData);
-    console.log(tempData);
-  }, [cartItems]);
+  }, [cartItems, products]);
 
   return (
     <div className=" border-t pt-14">
